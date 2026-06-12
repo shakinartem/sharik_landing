@@ -1,43 +1,79 @@
-import { ReferenceCanvas } from "./shared";
+import { Compass, SearchCheck, Shapes, Workflow, Rocket } from "lucide-react";
+import { FallbackImage } from "../FallbackImage";
+import { assetUrl } from "../../lib/assets";
 
-const processLayers = [
-  { src: "Ассеты сайт/Поток/Как мы выстраиваем поток пациентов.svg", x: 252, y: 41, w: 845, h: 40 },
-  { src: "Ассеты сайт/Поток/Сначала разбираем систему, потом усиливаем точки, которые реально влияют на запись..svg", x: 414, y: 101, w: 467, h: 44 },
-  { src: "Ассеты сайт/Поток/глаз 1.svg", x: 86, y: 189, w: 44, h: 31 },
-  { src: "Ассеты сайт/Поток/01 Аудит.svg", x: 86, y: 241, w: 74, h: 22 },
-  { src: "Ассеты сайт/Поток/Смотрим сайт, карты, отзывы, контент, заявки и аналитику..svg", x: 86, y: 286, w: 192, h: 46 },
-  { src: "Ассеты сайт/Поток/Line 17.svg", x: 296, y: 202, w: 80, h: 2 },
-  { src: "Ассеты сайт/Поток/Ellipse 33.svg", x: 378, y: 198, w: 9, h: 9 },
-  { src: "Ассеты сайт/Поток/дартс 1.svg", x: 322, y: 189, w: 43, h: 43 },
-  { src: "Ассеты сайт/Поток/02 Стратегия.svg", x: 322, y: 241, w: 117, h: 22 },
-  { src: "Ассеты сайт/Поток/Определяем, где потери и какие инструменты дадут быстрый эффект..svg", x: 322, y: 286, w: 205, h: 46 },
-  { src: "Ассеты сайт/Поток/Line 18.svg", x: 532, y: 202, w: 80, h: 2 },
-  { src: "Ассеты сайт/Поток/Ellipse 34.svg", x: 614, y: 198, w: 9, h: 9 },
-  { src: "Ассеты сайт/Поток/куб 1.svg", x: 558, y: 189, w: 43, h: 43 },
-  { src: "Ассеты сайт/Поток/03 Упаковка.svg", x: 558, y: 241, w: 116, h: 22 },
-  { src: "Ассеты сайт/Поток/Усиливаем смыслы, страницы, карточки, офферы и доверие..svg", x: 558, y: 286, w: 206, h: 46 },
-  { src: "Ассеты сайт/Поток/Line 19.svg", x: 768, y: 202, w: 80, h: 2 },
-  { src: "Ассеты сайт/Поток/Ellipse 35.svg", x: 850, y: 198, w: 9, h: 9 },
-  { src: "Ассеты сайт/Поток/график 3.svg", x: 792, y: 189, w: 43, h: 37 },
-  { src: "Ассеты сайт/Поток/04 Внедрение.svg", x: 792, y: 241, w: 121, h: 22 },
-  { src: "Ассеты сайт/Поток/Запускаем сайт, контент, карты, CRM, автоматизацию и отчётность.svg", x: 792, y: 286, w: 215, h: 46 },
-  { src: "Ассеты сайт/Поток/Line 20.svg", x: 1002, y: 202, w: 80, h: 2 },
-  { src: "Ассеты сайт/Поток/Ellipse 36.svg", x: 1084, y: 198, w: 9, h: 9 },
-  { src: "Ассеты сайт/Поток/ракета 1.svg", x: 1030, y: 189, w: 43, h: 43 },
-  { src: "Ассеты сайт/Поток/05 Рост.svg", x: 1030, y: 241, w: 83, h: 22 },
-  { src: "Ассеты сайт/Поток/Масштабируем работающие связки и улучшаем воронку..svg", x: 1030, y: 286, w: 174, h: 46 },
-  { src: "Ассеты сайт/Поток/logo-clear 3.svg", x: 595, y: 455, w: 75, h: 106 },
+const processSteps = [
+  {
+    icon: SearchCheck,
+    step: "01",
+    title: "Аудит",
+    text: "Смотрим сайт, карточки, отзывы, контент, заявки и аналитику.",
+  },
+  {
+    icon: Compass,
+    step: "02",
+    title: "Стратегия",
+    text: "Выбираем точки роста и собираем план без лишних гипотез.",
+  },
+  {
+    icon: Shapes,
+    step: "03",
+    title: "Упаковка",
+    text: "Усиливаем смыслы, страницы, карточки и доверительные блоки.",
+  },
+  {
+    icon: Workflow,
+    step: "04",
+    title: "Внедрение",
+    text: "Настраиваем CRM-связки, обработку заявок и аналитику.",
+  },
+  {
+    icon: Rocket,
+    step: "05",
+    title: "Рост",
+    text: "Смотрим динамику и усиливаем только работающие связки.",
+  },
 ];
+
+const lineSources = [assetUrl("assets/process/process-line.svg")];
 
 export function ProcessSection() {
   return (
-    <ReferenceCanvas id="process" height={619} background="Ассеты сайт/Поток/архитектурные line-art фон 4 1.svg" layers={processLayers} className="process-ref">
-      <div className="ref-text process-title">
-        Как мы выстраиваем <span>поток пациентов</span>
+    <section id="process" className="sh-section sh-process reveal">
+      <div className="sh-container">
+        <div className="sh-section__heading">
+          <p className="sh-kicker">Процесс</p>
+          <h2>Спокойный процесс без маркетингового шума</h2>
+          <p>
+            Сначала разбираем реальную механику клиники, потом усиливаем только те точки, которые влияют на запись.
+          </p>
+        </div>
+
+        <div className="sh-process__wrap">
+          <FallbackImage
+            sources={lineSources}
+            alt=""
+            className="sh-process__line"
+            fallback={<div className="sh-process__line-fallback" />}
+          />
+
+          <div className="sh-process__grid">
+            {processSteps.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article key={item.step} className="sh-card sh-process__card">
+                  <div className="sh-process__step">
+                    <span>{item.step}</span>
+                    <Icon size={18} />
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
       </div>
-      <p className="ref-text process-copy">
-        Сначала разбираем систему, потом усиливаем точки, которые реально влияют на запись.
-      </p>
-    </ReferenceCanvas>
+    </section>
   );
 }

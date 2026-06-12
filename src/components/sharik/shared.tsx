@@ -1,15 +1,14 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
+import { assetUrl } from "../../lib/assets";
 
 export function assetPath(path: string) {
-  return `${import.meta.env.BASE_URL}assets/sharik/${encodeURIComponent(path)}`;
+  return assetUrl(`assets/sharik/${path}`);
 }
 
 export function figmaAssetPath(path: string) {
-  return `${import.meta.env.BASE_URL}assets-figma/${path
-    .split("/")
-    .map((part) => encodeURIComponent(part).replace(/%2C/g, ","))
-    .join("/")}`;
+  const cleanPath = path.replace(/^Ассеты сайт\//, "").replace(/^assets-figma\//, "");
+  return assetUrl(`assets-figma/${cleanPath}`);
 }
 
 export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {

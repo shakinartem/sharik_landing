@@ -1,62 +1,88 @@
-import { ReferenceCanvas } from "./shared";
+import { AlertTriangle, Eye, HandCoins, MessageSquareMore, Search } from "lucide-react";
+import { FallbackImage } from "../FallbackImage";
+import { assetUrl } from "../../lib/assets";
 
-const lossLayers = [
-  { src: "Ассеты сайт/Где теряет/Где клиника теряет пациентов_.svg", x: 55, y: 15, w: 473, h: 100 },
-  { src: "Ассеты сайт/Где теряет/Часто проблема не в одной рекламе. Пациент может потеряться на сайте, в карточках, отзывах, переписке, звонке или CRM.svg", x: 55, y: 136, w: 290, h: 72 },
-  { src: "Ассеты сайт/Где теряет/Ellipse 14.svg", x: 64, y: 246, w: 70, h: 70 },
-  { src: "Ассеты сайт/Где теряет/веб 1.svg", x: 78, y: 259, w: 43, h: 37 },
-  { src: "Ассеты сайт/Где теряет/Сайт не объясняет ценность.svg", x: 145, y: 266, w: 94, h: 31 },
-  { src: "Ассеты сайт/Где теряет/Ellipse 14-1.svg", x: 239, y: 246, w: 70, h: 70 },
-  { src: "Ассеты сайт/Где теряет/карта 1.svg", x: 254, y: 258, w: 40, h: 41 },
-  { src: "Ассеты сайт/Где теряет/Карты не вызывают доверия.svg", x: 318, y: 266, w: 106, h: 31 },
-  { src: "Ассеты сайт/Где теряет/Ellipse 14-2.svg", x: 399, y: 246, w: 70, h: 70 },
-  { src: "Ассеты сайт/Где теряет/щит 1.svg", x: 419, y: 260, w: 31, h: 36 },
-  { src: "Ассеты сайт/Где теряет/Отзывы не работают на выбор.svg", x: 465, y: 266, w: 111, h: 31 },
-  { src: "Ассеты сайт/Где теряет/Ellipse 14-3.svg", x: 64, y: 358, w: 70, h: 70 },
-  { src: "Ассеты сайт/Где теряет/док с карандашом 1.svg", x: 82, y: 370, w: 35, h: 42 },
-  { src: "Ассеты сайт/Где теряет/Контент не прогревает пациента.svg", x: 145, y: 379, w: 118, h: 31 },
-  { src: "Ассеты сайт/Где теряет/Ellipse 14-4.svg", x: 238, y: 358, w: 70, h: 70 },
-  { src: "Ассеты сайт/Где теряет/часы 1.svg", x: 254, y: 372, w: 39, h: 39 },
-  { src: "Ассеты сайт/Где теряет/Заявки обрабатываются медленно.svg", x: 318, y: 379, w: 117, h: 31 },
-  { src: "Ассеты сайт/Где теряет/Ellipse 14-5.svg", x: 401, y: 358, w: 70, h: 70 },
-  { src: "Ассеты сайт/Где теряет/график 1.svg", x: 414, y: 373, w: 43, h: 37 },
-  { src: "Ассеты сайт/Где теряет/Нет аналитики по источникам.svg", x: 478, y: 379, w: 117, h: 31 },
-  { src: "Ассеты сайт/Где теряет/Проверьте, где именно вы теряете пациентов.svg", x: 60, y: 516, w: 310, h: 67 },
-  { src: "Ассеты сайт/Где теряет/Ellipse 27.svg", x: 620, y: 46, w: 70, h: 70 },
-  { src: "Ассеты сайт/Где теряет/глаз 1.svg", x: 633, y: 66, w: 43, h: 30 },
-  { src: "Ассеты сайт/Где теряет/Не заметил.svg", x: 615, y: 136, w: 81, h: 27 },
-  { src: "Ассеты сайт/Где теряет/Ellipse 27-1.svg", x: 767, y: 96, w: 70, h: 70 },
-  { src: "Ассеты сайт/Где теряет/лупа 1.svg", x: 782, y: 111, w: 40, h: 40 },
-  { src: "Ассеты сайт/Где теряет/Не нашёл ответы.svg", x: 756, y: 186, w: 92, h: 27 },
-  { src: "Ассеты сайт/Где теряет/Ellipse 27-2.svg", x: 903, y: 184, w: 70, h: 70 },
-  { src: "Ассеты сайт/Где теряет/щит 1.svg", x: 923, y: 198, w: 31, h: 36 },
-  { src: "Ассеты сайт/Где теряет/Не доверился.svg", x: 879, y: 274, w: 118, h: 27 },
-  { src: "Ассеты сайт/Где теряет/Ellipse 27-3.svg", x: 1032, y: 230, w: 70, h: 70 },
-  { src: "Ассеты сайт/Где теряет/сообщение 1.svg", x: 1046, y: 246, w: 43, h: 36 },
-  { src: "Ассеты сайт/Где теряет/Не оставил заявку.svg", x: 1017, y: 320, w: 101, h: 27 },
-  { src: "Ассеты сайт/Где теряет/Ellipse 27-4.svg", x: 1151, y: 270, w: 70, h: 70 },
-  { src: "Ассеты сайт/Где теряет/календарь 1.svg", x: 1167, y: 285, w: 38, h: 39 },
-  { src: "Ассеты сайт/Где теряет/Не пришёл.svg", x: 1146, y: 360, w: 80, h: 27 },
-  { src: "Ассеты сайт/Где теряет/Vector 1.svg", x: 679, y: 102, w: 80, h: 55 },
-  { src: "Ассеты сайт/Где теряет/Vector 2.svg", x: 817, y: 172, w: 75, h: 57 },
-  { src: "Ассеты сайт/Где теряет/Vector 3.svg", x: 949, y: 239, w: 73, h: 47 },
-  { src: "Ассеты сайт/Где теряет/Vector 4.svg", x: 1083, y: 300, w: 78, h: 33 },
+const lossItems = [
+  {
+    icon: Eye,
+    title: "Сайт не объясняет ценность",
+    text: "Пользователь не понимает, почему стоит выбрать именно эту клинику.",
+  },
+  {
+    icon: Search,
+    title: "Карты и отзывы не убеждают",
+    text: "Карточка клиники выглядит слабее конкурентов и не поддерживает доверие.",
+  },
+  {
+    icon: MessageSquareMore,
+    title: "Контент не прогревает",
+    text: "Тексты не отвечают на вопросы пациента и не ведут к следующему шагу.",
+  },
+  {
+    icon: HandCoins,
+    title: "Заявки теряются",
+    text: "Слабая обработка обращений ломает путь между интересом и записью.",
+  },
 ];
+
+const pathSources = [assetUrl("assets/loss-map/loss-map-path.svg")];
 
 export function LossMapSection() {
   return (
-    <ReferenceCanvas id="loss-map" height={594} background="Ассеты сайт/Где теряет/фон белый 3.svg" layers={lossLayers} className="loss-ref">
-      <div className="ref-text loss-title">
-        Где клиника
-        <br />
-        <span>теряет</span> пациентов?
+    <section id="loss-map" className="sh-section sh-loss reveal">
+      <div className="sh-container">
+        <div className="sh-section__heading sh-section__heading--split">
+          <div>
+            <p className="sh-kicker">Потери</p>
+            <h2>Где клиника теряет пациентов</h2>
+            <p>
+              Проблема редко бывает в одной рекламе. Потери возникают на сайте, в карточках, отзывах, переписке и обработке заявок.
+            </p>
+          </div>
+
+          <div className="sh-loss__callout">
+            <AlertTriangle size={18} />
+            <span>Сначала находим узкое место, потом усиливаем именно его.</span>
+          </div>
+        </div>
+
+        <div className="sh-loss__layout">
+          <div className="sh-loss__cards">
+            {lossItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article key={item.title} className="sh-card sh-loss__card">
+                  <span className="sh-icon-pill" aria-hidden="true">
+                    <Icon size={18} />
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </article>
+              );
+            })}
+          </div>
+
+          <aside className="sh-loss__path" aria-label="Путь пациента">
+            <FallbackImage
+              sources={pathSources}
+              alt=""
+              className="sh-loss__path-img"
+              fallback={<div className="sh-loss__path-fallback" />}
+            />
+            <div className="sh-loss__path-grid">
+              {["Увидел клинику", "Изучил сайт", "Проверил отзывы", "Оставил заявку", "Записался"].map((step, index) => (
+                <div key={step} className="sh-loss__step">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{step}</strong>
+                </div>
+              ))}
+            </div>
+            <p className="sh-loss__note">
+              На каждом шаге можно терять внимание. Мы показываем, где именно это происходит, и что исправлять в первую очередь.
+            </p>
+          </aside>
+        </div>
       </div>
-      <p className="ref-text loss-copy">
-        Часто проблема не в одной рекламе. Пациент может потеряться на сайте, в карточках, отзывах, переписке, звонке или CRM.
-      </p>
-      <a href="#cta" className="ref-live-button loss-button">
-        Получить стратегический разбор
-      </a>
-    </ReferenceCanvas>
+    </section>
   );
 }

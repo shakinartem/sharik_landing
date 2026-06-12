@@ -1,84 +1,111 @@
-import { ReferenceCanvas } from "./shared";
+import { ArrowRight, Sparkles, TrendingUp, Shield, Route } from "lucide-react";
+import { FallbackImage } from "../FallbackImage";
+import { assetUrl } from "../../lib/assets";
 
-const heroLayers = [
-  { src: "Ассеты сайт/Хиро/Маркетинг для стоматологий, который приводит пациентов.svg", x: 68, y: 49, w: 473, h: 206 },
-  { src: "Ассеты сайт/Хиро/Строим системный digital-маркетинг для клиник_ сайт, карты, репутация, контент, CRM, аналитика и автоматизация — чтобы пациент не терялся по.svg", x: 69, y: 278, w: 363, h: 78 },
-  { src: "Ассеты сайт/Хиро/Кнопка.svg", x: 69, y: 376, w: 235, h: 44 },
-  { src: "Ассеты сайт/Хиро/Кнопка-1.svg", x: 334, y: 376, w: 184, h: 44 },
-  { src: "Ассеты сайт/Хиро/Увидел клинику круг.svg", x: 611, y: 28, w: 64, h: 64 },
-  { src: "Ассеты сайт/Хиро/Увидел клинику иконка.svg", x: 620, y: 46, w: 46, h: 28 },
-  { src: "Ассеты сайт/Хиро/Увидел клинику линия.svg", x: 642, y: 98, w: 2, h: 23 },
-  { src: "Ассеты сайт/Хиро/Увидел клинику.svg", x: 617, y: 131, w: 53, h: 27 },
-  { src: "Ассеты сайт/Хиро/Увидел клинику круг-1.svg", x: 746, y: 28, w: 64, h: 64 },
-  { src: "Ассеты сайт/Хиро/Увидел клинику иконка-1.svg", x: 763, y: 43, w: 30, h: 34 },
-  { src: "Ассеты сайт/Хиро/Увидел клинику линия.svg", x: 777, y: 98, w: 2, h: 23 },
-  { src: "Ассеты сайт/Хиро/Изучил услуги.svg", x: 752, y: 131, w: 52, h: 27 },
-  { src: "Ассеты сайт/Хиро/Поверил отзывам круг.svg", x: 873, y: 28, w: 64, h: 64 },
-  { src: "Ассеты сайт/Хиро/Поверил отзывам иконка.svg", x: 887, y: 42, w: 36, h: 35 },
-  { src: "Ассеты сайт/Хиро/Поверил отзывам линия.svg", x: 904, y: 98, w: 2, h: 72 },
-  { src: "Ассеты сайт/Хиро/Поверил отзывам.svg", x: 879, y: 181, w: 53, h: 27 },
-  { src: "Ассеты сайт/Хиро/Оставил заявку круг.svg", x: 997, y: 28, w: 64, h: 64 },
-  { src: "Ассеты сайт/Хиро/Оставил заявку иконка.svg", x: 1010, y: 43, w: 38, h: 33 },
-  { src: "Ассеты сайт/Хиро/Оставил заявку линия.svg", x: 1028, y: 98, w: 2, h: 23 },
-  { src: "Ассеты сайт/Хиро/Оставил заявку.svg", x: 1003, y: 131, w: 52, h: 27 },
-  { src: "Ассеты сайт/Хиро/Записался на прием круг.svg", x: 1121, y: 28, w: 64, h: 64 },
-  { src: "Ассеты сайт/Хиро/Записался на прием иконка.svg", x: 1137, y: 40, w: 32, h: 39 },
-  { src: "Ассеты сайт/Хиро/Записался на прием линия.svg", x: 1152, y: 98, w: 2, h: 23 },
-  { src: "Ассеты сайт/Хиро/Записался на приём.svg", x: 1119, y: 131, w: 68, h: 27 },
-  { src: "Ассеты сайт/Хиро/линия между глазом и зубом.svg", x: 676, y: 96, w: 60, h: 10 },
-  { src: "Ассеты сайт/Хиро/Линия между зубом и отзывом.svg", x: 808, y: 96, w: 62, h: 10 },
-  { src: "Ассеты сайт/Хиро/Линия между отзывом и заявкой.svg", x: 936, y: 96, w: 58, h: 10 },
-  { src: "Ассеты сайт/Хиро/Линия между заявкой и записью.svg", x: 1061, y: 96, w: 58, h: 10 },
-  { src: "Ассеты сайт/Хиро/Логотип.svg", x: 858, y: 198, w: 75, h: 106 },
-  { src: "Ассеты сайт/Хиро/Заявки круг.svg", x: 598, y: 347, w: 64, h: 64 },
-  { src: "Ассеты сайт/Хиро/Заявки иконка.svg", x: 617, y: 364, w: 27, h: 30 },
-  { src: "Ассеты сайт/Хиро/Заявки линия.svg", x: 677, y: 383, w: 48, h: 2 },
-  { src: "Ассеты сайт/Хиро/Заявки.svg", x: 721, y: 376, w: 40, h: 9 },
-  { src: "Ассеты сайт/Хиро/Конверсия круг.svg", x: 817, y: 347, w: 64, h: 64 },
-  { src: "Ассеты сайт/Хиро/Конверсия иконка.svg", x: 836, y: 366, w: 27, h: 26 },
-  { src: "Ассеты сайт/Хиро/Конверсия линия.svg", x: 896, y: 383, w: 48, h: 2 },
-  { src: "Ассеты сайт/Хиро/Конверсия в запись.svg", x: 943, y: 374, w: 59, h: 20 },
-  { src: "Ассеты сайт/Хиро/Стоимость круг.svg", x: 1075, y: 347, w: 64, h: 64 },
-  { src: "Ассеты сайт/Хиро/Стоимость иконка.svg", x: 1092, y: 363, w: 30, h: 31 },
-  { src: "Ассеты сайт/Хиро/Стоимость обращения линия.svg", x: 1154, y: 383, w: 48, h: 2 },
-  { src: "Ассеты сайт/Хиро/Стоимость обращения.svg", x: 1199, y: 374, w: 79, h: 20 },
-  { src: "Ассеты сайт/Хиро/Стратегия круг.svg", x: 68, y: 478, w: 77, h: 77 },
-  { src: "Ассеты сайт/Хиро/Стратегия иконка.svg", x: 91, y: 497, w: 30, h: 38 },
-  { src: "Ассеты сайт/Хиро/Стратегия.svg", x: 158, y: 486, w: 69, h: 13 },
-  { src: "Ассеты сайт/Хиро/Опираемся на аналитику и цели вашей клиники.svg", x: 158, y: 511, w: 195, h: 23 },
-  { src: "Ассеты сайт/Хиро/Линия между стратегией и системой.svg", x: 356, y: 516, w: 34, h: 2 },
-  { src: "Ассеты сайт/Хиро/Система-1.svg", x: 391, y: 478, w: 77, h: 77 },
-  { src: "Ассеты сайт/Хиро/гайка 1.svg", x: 412, y: 499, w: 35, h: 35 },
-  { src: "Ассеты сайт/Хиро/Система.svg", x: 482, y: 486, w: 58, h: 13 },
-  { src: "Ассеты сайт/Хиро/Выстраиваем процессы, а не разовые действия.svg", x: 482, y: 511, w: 172, h: 23 },
-  { src: "Ассеты сайт/Хиро/Линия между системой и прозрачностью.svg", x: 656, y: 516, w: 34, h: 2 },
-  { src: "Ассеты сайт/Хиро/Прозрачность-1.svg", x: 690, y: 478, w: 77, h: 77 },
-  { src: "Ассеты сайт/Хиро/щит 1.svg", x: 712, y: 498, w: 32, h: 37 },
-  { src: "Ассеты сайт/Хиро/Прозрачность.svg", x: 782, y: 486, w: 98, h: 13 },
-  { src: "Ассеты сайт/Хиро/Понятная отчётность и честные метрики.svg", x: 782, y: 511, w: 174, h: 23 },
-  { src: "Ассеты сайт/Хиро/Линия между прозрачностью и ростом заявок.svg", x: 953, y: 516, w: 34, h: 2 },
-  { src: "Ассеты сайт/Хиро/Рост заявок-1.svg", x: 986, y: 478, w: 77, h: 77 },
-  { src: "Ассеты сайт/Хиро/люди 1.svg", x: 1009, y: 499, w: 31, h: 36 },
-  { src: "Ассеты сайт/Хиро/Рост заявок.svg", x: 1078, y: 486, w: 90, h: 13 },
-  { src: "Ассеты сайт/Хиро/Больше записей из тех же обращений.svg", x: 1078, y: 511, w: 136, h: 23 },
+const heroStats = [
+  { label: "Фокус", value: "Сайт, карты, CRM" },
+  { label: "Результат", value: "Больше записей" },
+  { label: "Подход", value: "Живой HTML" },
 ];
+
+const heroPoints = [
+  "Показываем, где пациент теряется на пути к записи.",
+  "Собираем удобную систему из страниц, карточек, отзывов и CRM.",
+  "Сайт остаётся читаемым, даже если декоративная графика не загрузится.",
+];
+
+const decorSources = [assetUrl("assets/hero/hero-balloon.svg")];
+const routeSources = [assetUrl("assets/hero/hero-route.svg")];
 
 export function HeroSection() {
   return (
-    <ReferenceCanvas id="top" height={606} background="Ассеты сайт/Хиро/фон белый 2.svg" layers={heroLayers} className="hero-ref">
-      <div className="ref-text hero-title">
-        Маркетинг для стоматологий, который <span>приводит пациентов</span>
+    <section id="top" className="sh-hero">
+      <div className="sh-container sh-hero__grid">
+        <div className="sh-hero__copy reveal">
+          <p className="sh-kicker">ШАРиК digital для клиник</p>
+          <h1 className="sh-hero__title">
+            Маркетинг, который
+            <span>приводит пациентов</span>
+          </h1>
+          <p className="sh-hero__lead">
+            Строим понятную digital-систему: сайт, карты, отзывы, контент, CRM и аналитику. Тексты и сценарии живут в HTML,
+            а графика остаётся только аккуратным декором.
+          </p>
+
+          <div className="sh-hero__actions">
+            <a href="#cta" className="sh-button sh-button--primary">
+              Получить разбор
+              <ArrowRight size={18} />
+            </a>
+            <a href="#system" className="sh-button sh-button--secondary">
+              Смотреть систему
+            </a>
+          </div>
+
+          <ul className="sh-hero__points">
+            {heroPoints.map((point) => (
+              <li key={point}>
+                <Sparkles size={16} />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <aside className="sh-hero__panel reveal">
+          <div className="sh-hero__panel-top">
+            <div className="sh-hero__panel-copy">
+              <p className="sh-hero__panel-label">Что видит владелец</p>
+              <h2>Быстрый и понятный рост без магии</h2>
+            </div>
+
+            <div className="sh-hero__ornament sh-hero__ornament--balloon" aria-hidden="true">
+              <FallbackImage
+                sources={decorSources}
+                alt=""
+                className="sh-hero__ornament-img"
+                fallback={<div className="sh-hero__ornament-fallback" />}
+              />
+            </div>
+          </div>
+
+          <div className="sh-hero__signals">
+            <div className="sh-hero__signal">
+              <TrendingUp size={18} />
+              <h3>Рост заявки</h3>
+              <p>Понимаем, какие каналы и страницы реально двигают обращение.</p>
+            </div>
+            <div className="sh-hero__signal">
+              <Shield size={18} />
+              <h3>Доверие</h3>
+              <p>Усиливаем сайт, отзывы и карточки клиники в точках принятия решения.</p>
+            </div>
+            <div className="sh-hero__signal">
+              <Route size={18} />
+              <h3>Маршрут</h3>
+              <p>Собираем путь от первого касания до записи без лишних потерь.</p>
+            </div>
+          </div>
+
+          <div className="sh-hero__route" aria-hidden="true">
+            <FallbackImage
+              sources={routeSources}
+              alt=""
+              className="sh-hero__route-img"
+              fallback={<div className="sh-hero__route-fallback" />}
+            />
+          </div>
+
+          <div className="sh-hero__stats">
+            {heroStats.map((stat) => (
+              <div key={stat.label} className="sh-hero__stat">
+                <span>{stat.label}</span>
+                <strong>{stat.value}</strong>
+              </div>
+            ))}
+          </div>
+        </aside>
       </div>
-      <p className="ref-text hero-copy">
-        Строим системный digital-маркетинг для клиник: сайт, карты, репутация, контент, CRM, аналитика и автоматизация
-        — чтобы пациент не терялся по пути к записи.
-      </p>
-      <a href="#cta" className="ref-live-button hero-primary">
-        Получить стратегический разбор
-      </a>
-      <a href="#system" className="ref-live-button ref-live-button--light hero-secondary">
-        Посмотреть решения
-      </a>
-    </ReferenceCanvas>
+    </section>
   );
 }

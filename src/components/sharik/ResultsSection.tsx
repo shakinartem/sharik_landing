@@ -1,56 +1,82 @@
-import { ReferenceCanvas } from "./shared";
+import { ArrowUpRight, CheckCircle2, LayoutDashboard, LineChart, ListChecks } from "lucide-react";
+import { FallbackImage } from "../FallbackImage";
+import { assetUrl } from "../../lib/assets";
 
-const resultsLayers = [
-  { src: "Ассеты сайт/Результаты/РЕЗУЛЬТАТЫ И ВЫВОДЫ.svg", x: 50, y: 36, w: 178, h: 14 },
-  { src: "Ассеты сайт/Результаты/Показываем не красивые отчёты, а точки роста клиники.svg", x: 50, y: 69, w: 588, h: 122 },
-  { src: "Ассеты сайт/Результаты/На разборе видно, какие элементы мешают пациенту дойти по записи и что стоит усилить в первую очередь..svg", x: 50, y: 211, w: 314, h: 54 },
-  { src: "Ассеты сайт/Результаты/Ellipse 37.svg", x: 54, y: 282, w: 62, h: 62 },
-  { src: "Ассеты сайт/Результаты/галка 1.svg", x: 73, y: 303, w: 23, h: 18 },
-  { src: "Ассеты сайт/Результаты/Повысить доверие до обращения.svg", x: 126, y: 298, w: 111, h: 29 },
-  { src: "Ассеты сайт/Результаты/Ellipse 38.svg", x: 250, y: 282, w: 62, h: 62 },
-  { src: "Ассеты сайт/Результаты/галка 2.svg", x: 269, y: 303, w: 23, h: 18 },
-  { src: "Ассеты сайт/Результаты/Упростить путь до записи.svg", x: 322, y: 298, w: 92, h: 29 },
-  { src: "Ассеты сайт/Результаты/Ellipse 39.svg", x: 425, y: 282, w: 62, h: 62 },
-  { src: "Ассеты сайт/Результаты/галка 3.svg", x: 444, y: 303, w: 23, h: 18 },
-  { src: "Ассеты сайт/Результаты/Усилить видимость в картах.svg", x: 497, y: 298, w: 123, h: 29 },
-  { src: "Ассеты сайт/Результаты/Ellipse 40.svg", x: 108, y: 367, w: 62, h: 62 },
-  { src: "Ассеты сайт/Результаты/галка 4.svg", x: 127, y: 388, w: 23, h: 18 },
-  { src: "Ассеты сайт/Результаты/Снизить потери при обработке заявок.svg", x: 180, y: 383, w: 160, h: 29 },
-  { src: "Ассеты сайт/Результаты/Ellipse 41.svg", x: 350, y: 367, w: 62, h: 62 },
-  { src: "Ассеты сайт/Результаты/галка 1.svg", x: 369, y: 388, w: 23, h: 18 },
-  { src: "Ассеты сайт/Результаты/Понять, какие каналы приводят пациентов.svg", x: 422, y: 383, w: 160, h: 29 },
-  { src: "Результаты/Подложка графиков и диаграм.svg", x: 647, y: 24, w: 598, h: 422 },
-  { src: "Результаты/Источники обращений.svg", x: 670, y: 47, w: 226, h: 162 },
-  { src: "Результаты/Путь пациента.svg", x: 910, y: 47, w: 312, h: 162 },
-  { src: "Результаты/Карта потерь.svg", x: 670, y: 228, w: 280, h: 195 },
-  { src: "Результаты/План работ.svg", x: 965, y: 228, w: 257, h: 195 },
-  { src: "Результаты/Подложка под кнопки и результат.svg", x: 37, y: 477, w: 1208, h: 104 },
-  { src: "Ассеты сайт/Результаты/Ellipse 37-1.svg", x: 73, y: 491, w: 77, h: 77 },
-  { src: "Ассеты сайт/Результаты/дартс 2.svg", x: 87, y: 506, w: 49, h: 48 },
-  { src: "Ассеты сайт/Результаты/Результат разбора — конкретные выводы и приоритеты..svg", x: 182, y: 507, w: 348, h: 45 },
-  { src: "Ассеты сайт/Результаты/Кнопка-1.svg", x: 650, y: 507, w: 202, h: 50 },
-  { src: "Ассеты сайт/Результаты/Кнопка.svg", x: 888, y: 507, w: 250, h: 50 },
+const resultCards = [
+  {
+    icon: CheckCircle2,
+    title: "Повысить доверие до обращения",
+    text: "Усиливаем сайт, отзывы и карточки клиники до того, как пациент нажмёт на кнопку записи.",
+  },
+  {
+    icon: LayoutDashboard,
+    title: "Упростить путь до записи",
+    text: "Убираем лишние шаги и делаем маршрут понятным с первого экрана.",
+  },
+  {
+    icon: LineChart,
+    title: "Понять, какие каналы приводят пациентов",
+    text: "Делаем аналитику, в которой видно не только трафик, но и качество обращений.",
+  },
 ];
+
+const dashboardSources = [assetUrl("assets/results/results-dashboard.svg")];
+
+const auditItems = ["Сайт и посадочные", "Карты и геопозиции", "Отзывы и репутация", "Путь пациента до записи", "Обработку заявок", "CRM и аналитику"];
 
 export function ResultsSection() {
   return (
-    <ReferenceCanvas id="results" height={620} background="Результаты/фон.svg" layers={resultsLayers} className="results-ref">
-      <div className="ref-text results-title">
-        Показываем не красивые
-        <br />
-        отчёты, а <span>точки роста</span>
-        <br />
-        <span>клиники</span>
+    <section id="results" className="sh-section sh-results reveal">
+      <div className="sh-container">
+        <div className="sh-section__heading">
+          <p className="sh-kicker">Результаты</p>
+          <h2>Показываем не красивые отчеты, а точки роста клиники</h2>
+          <p>
+            На разборе видно, какие элементы мешают пациенту дойти до записи и что стоит усилить в первую очередь.
+          </p>
+        </div>
+
+        <div className="sh-results__layout">
+          <div className="sh-results__cards">
+            {resultCards.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article key={item.title} className="sh-card sh-results__card">
+                  <span className="sh-icon-pill" aria-hidden="true">
+                    <Icon size={18} />
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </article>
+              );
+            })}
+          </div>
+
+          <aside className="sh-results__dashboard">
+            <FallbackImage
+              sources={dashboardSources}
+              alt=""
+              className="sh-results__dashboard-img"
+              fallback={<div className="sh-results__dashboard-fallback" />}
+            />
+            <div className="sh-results__audit">
+              <p className="sh-results__audit-label">Проверяем</p>
+              <ul>
+                {auditItems.map((item) => (
+                  <li key={item}>
+                    <ListChecks size={16} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <a href="#cta" className="sh-button sh-button--primary sh-results__button">
+                Получить разбор
+                <ArrowUpRight size={18} />
+              </a>
+            </div>
+          </aside>
+        </div>
       </div>
-      <p className="ref-text results-copy">
-        На разборе видно, какие элементы мешают пациенту дойти по записи и что стоит усилить в первую очередь.
-      </p>
-      <a href="#cta" className="ref-live-button results-primary">
-        Получить разбор
-      </a>
-      <a href="#system" className="ref-live-button ref-live-button--light results-secondary">
-        Посмотреть пример разбора
-      </a>
-    </ReferenceCanvas>
+    </section>
   );
 }

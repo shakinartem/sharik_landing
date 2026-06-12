@@ -6,6 +6,7 @@ import { HeroSection } from "./components/sharik/HeroSection";
 import { LossMapSection } from "./components/sharik/LossMapSection";
 import { ProcessSection } from "./components/sharik/ProcessSection";
 import { ResultsSection } from "./components/sharik/ResultsSection";
+import { Footer } from "./components/sharik/Footer";
 
 function App() {
   useEffect(() => {
@@ -50,6 +51,7 @@ function App() {
         <ProcessSection />
         <ResultsSection />
         <CTAFormSection />
+        <Footer />
       </main>
     </div>
   );

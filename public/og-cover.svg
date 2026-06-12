@@ -1,0 +1,11 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="44" fill="#061C41"/>
+  <circle cx="1022" cy="112" r="164" fill="#C66A3D" fill-opacity="0.16"/>
+  <circle cx="186" cy="540" r="198" fill="#C66A3D" fill-opacity="0.08"/>
+  <path d="M132 160C262 108 414 92 600 92C786 92 938 108 1068 160" stroke="#C66A3D" stroke-opacity="0.55" stroke-width="14" stroke-linecap="round"/>
+  <path d="M132 210C262 158 414 142 600 142C786 142 938 158 1068 210" stroke="white" stroke-opacity="0.18" stroke-width="8" stroke-linecap="round"/>
+  <text x="120" y="340" fill="white" font-family="Arial, sans-serif" font-size="64" font-weight="700">ШАРиК digital</text>
+  <text x="120" y="410" fill="#F5EDE6" fill-opacity="0.9" font-family="Arial, sans-serif" font-size="30">Маркетинг для клиник с живым HTML и устойчивыми ассетами</text>
+  <rect x="120" y="474" width="320" height="74" rx="37" fill="#C66A3D"/>
+  <text x="152" y="522" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="700">shakinartem.github.io/sharik_landing</text>
+</svg>

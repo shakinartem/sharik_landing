@@ -1,44 +1,91 @@
-import { ReferenceCanvas } from "./shared";
+import { BarChart3, FileText, MapPin, MessageCircle, MonitorSmartphone, ShieldCheck } from "lucide-react";
+import { FallbackImage } from "../FallbackImage";
+import { assetUrl } from "../../lib/assets";
 
-const systemLayers = [
-  { src: "Ассеты сайт/Система/Собираем digital-систему для роста записей.svg", x: 79, y: 36, w: 513, h: 89 },
-  { src: "Ассеты сайт/Система/Берём не отдельный инструмент, а всю цепочку_ от первого касания пациента до записи и повторного визита..svg", x: 80, y: 140, w: 436, h: 36 },
-  { src: "Ассеты сайт/Система/веб 2.svg", x: 91, y: 232, w: 58, h: 50 },
-  { src: "Ассеты сайт/Система/Сайты и посадочные.svg", x: 166, y: 237, w: 141, h: 38 },
-  { src: "Ассеты сайт/Система/Страницы, которые оюъясняют услугу и ведут пациента к записи..svg", x: 166, y: 289, w: 191, h: 34 },
-  { src: "Ассеты сайт/Система/карта 2.svg", x: 495, y: 232, w: 55, h: 55 },
-  { src: "Ассеты сайт/Система/Карты и локальное продвижение.svg", x: 567, y: 237, w: 183, h: 38 },
-  { src: "Ассеты сайт/Система/Упаковка Яндекс Карт, 2ГИС и других точек, где пациент уже ищет клинику..svg", x: 567, y: 289, w: 183, h: 34 },
-  { src: "Ассеты сайт/Система/звезда 1.svg", x: 876, y: 232, w: 57, h: 55 },
-  { src: "Ассеты сайт/Система/Репутация и отзывы.svg", x: 950, y: 237, w: 151, h: 38 },
-  { src: "Ассеты сайт/Система/Работа с доверием, рейтингом, отзывами и репутационными площадками..svg", x: 950, y: 289, w: 193, h: 53 },
-  { src: "Ассеты сайт/Система/человек 1.svg", x: 104, y: 382, w: 49, h: 58 },
-  { src: "Ассеты сайт/Система/Контент и соцсети.svg", x: 176, y: 387, w: 149, h: 38 },
-  { src: "Ассеты сайт/Система/Контент, который снимает страхи, объясняет ценность и подводит к обращению..svg", x: 176, y: 439, w: 188, h: 46 },
-  { src: "Ассеты сайт/Система/телефон 1.svg", x: 489, y: 382, w: 56, h: 56 },
-  { src: "Ассеты сайт/Система/CRM и автоматизация.svg", x: 561, y: 387, w: 156, h: 38 },
-  { src: "Ассеты сайт/Система/Чтобы заявки не терялись, пациенты получали ответ, а команда видела воронку..svg", x: 561, y: 439, w: 220, h: 49 },
-  { src: "Ассеты сайт/Система/график 2.svg", x: 879, y: 382, w: 56, h: 50 },
-  { src: "Ассеты сайт/Система/Аналитика и стратегия.svg", x: 952, y: 387, w: 169, h: 38 },
-  { src: "Ассеты сайт/Система/Понимаем какие каналы работают, где потери и что усиливать дальше..svg", x: 952, y: 439, w: 194, h: 49 },
-  { src: "Ассеты сайт/Система/Мы не настраиваем отдельные инструменты — мы строим стабильную систему, которая приводит пациентов и растит записи..svg", x: 98, y: 536, w: 801, h: 46 },
-  { src: "Ассеты сайт/Система/Кнопка.svg", x: 973, y: 538, w: 199, h: 44 },
+const systemItems = [
+  {
+    icon: MonitorSmartphone,
+    title: "Сайты и посадочные",
+    text: "Страницы, которые объясняют ценность услуги, снимают сомнения и ведут к записи.",
+  },
+  {
+    icon: MapPin,
+    title: "Карты и локальный поиск",
+    text: "Карточки клиники, которые хорошо выглядят в Яндекс Картах, 2ГИС и других точках выбора.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Репутация и отзывы",
+    text: "Укрепляем доверие через отзывы, ответы, доказательства и внятные сценарии коммуникации.",
+  },
+  {
+    icon: FileText,
+    title: "Контент и соцсети",
+    text: "Материалы, которые закрывают вопросы пациента до обращения и поддерживают решение.",
+  },
+  {
+    icon: MessageCircle,
+    title: "CRM и обработка",
+    text: "Настраиваем обработку заявок, чтобы обращения не терялись между каналами и людьми.",
+  },
+  {
+    icon: BarChart3,
+    title: "Аналитика и стратегия",
+    text: "Понимаем, какие каналы дают результат, и усиливаем то, что действительно работает.",
+  },
 ];
+
+const systemDecorSources = [assetUrl("assets/system/system-shield.svg")];
 
 export function DigitalSystemSection() {
   return (
-    <ReferenceCanvas id="system" height={627} background="Ассеты сайт/Система/фон белый 4.svg" layers={systemLayers} className="system-ref">
-      <div className="ref-text system-title">
-        Собираем digital-систему
-        <br />
-        для <span>роста записей</span>
+    <section id="system" className="sh-section sh-system reveal">
+      <div className="sh-container">
+        <div className="sh-section__heading">
+          <p className="sh-kicker">Система</p>
+          <h2>Собираем digital-систему для роста записей</h2>
+          <p>
+            Не настраиваем отдельные инструменты по отдельности. Строим цепочку от первого касания до записи и повторного визита.
+          </p>
+        </div>
+
+        <div className="sh-system__layout">
+          <div className="sh-system__cards">
+            {systemItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article key={item.title} className="sh-card sh-system__card">
+                  <span className="sh-icon-pill" aria-hidden="true">
+                    <Icon size={18} />
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </article>
+              );
+            })}
+          </div>
+
+          <aside className="sh-system__aside">
+            <div className="sh-system__decor" aria-hidden="true">
+              <FallbackImage
+                sources={systemDecorSources}
+                alt=""
+                className="sh-system__decor-img"
+                fallback={<div className="sh-system__decor-fallback" />}
+              />
+            </div>
+
+            <div className="sh-system__summary">
+              <p className="sh-system__summary-label">Как это работает</p>
+              <ul>
+                <li>Сайт объясняет услугу и снимает тревогу.</li>
+                <li>Карты и отзывы подхватывают доверие.</li>
+                <li>CRM и аналитика помогают не терять заявки.</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
       </div>
-      <p className="ref-text system-copy">
-        Берём не отдельный инструмент, а всю цепочку: от первого касания пациента до записи и повторного визита.
-      </p>
-      <a href="#cta" className="ref-live-button ref-live-button--light system-button">
-        Обсудить мой проект
-      </a>
-    </ReferenceCanvas>
+    </section>
   );
 }
